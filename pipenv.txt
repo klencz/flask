@@ -1,0 +1,55 @@
+pipenv - mix pip i virtualenv
+kazdy projekt ma swoje wirtualne środowisko zamiast globalnych instalacji (pyhtona i pakietow)
+pip - pkg management
+virtualenv - virtual environment
+pipenv - mix
+- nie ma koniecznosci tworzenia wirtualnego srodowiska recznie - tworzy sie z defaultu
+- instalacja pakietow - wykorzystujac pipenv
+
+
+instalacja pipenv
+pip install pipenv
+
+# stworzenie nowego projektu
+## nawigacja do directory gdzie chcemy stworzyc projekt
+
+1. instalacja pierwszego z pakietow np. requests
+pipenv install requests
+Co sie zadzialo:
+- sprawdza czy jest virtalenv, jesli nie to je tworzy i aktywuje
+- wskazuje lokalizacje do Pipfile, virtaul environment
+- tworzy Pipfile
+- instalacja wskazanego pakietu i didaje do Pipfile
+- sprawdza czy jest Pipfile.lock, jesli nie to go tworzy
+
+2. aktywacja virtualenv
+pipenv shell
+- przez promptem w cl zawsze wskazanie na nazwe projektu
+- umieszcza nas w srodku wirtualnego środowiska tego projektu: inny python interpreter i inną lokalizację pakietów
+  pobranych
+- możemy sprawdzić jakiego python interpretera uzywamy w naszym projekcie:
+    import sys
+    sys.executable
+    widzimy lokalizacje ktora znajduje sie w naszymw irtualnym srodowisku
+
+
+3. odpalanie komand z virtualenv
+pipenv run
+
+Pipfile - podobny do requirements.txt
+- przepis na to jak odtworzyc nasze wirtualne środowisko
+- TOML - format, format, ktory prezentuje budowę klucz - wartość
+- source -
+- packages - lista pakietow, wraz z konkretna wersja jesli jest potrzebne
+- dev-packages -
+- requires - wskazanie wersji pythona
+- edytowalny - mozemy uzupelniac recznie nazwą pakietu
+
+
+Pipfile.lock
+- plik, ktorego nie powinnismy recznie zmieniac
+- bardziej szczegółowe info o naszym virtualenv
+- hashe
+- zawiera pakiety i zależności, dokładne wersje pakietów
+
+
