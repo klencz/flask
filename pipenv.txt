@@ -7,7 +7,7 @@ pipenv - mix
 - instalacja pakietow - wykorzystujac pipenv
 
 
-instalacja pipenv
+0. instalacja pipenv
 pip install pipenv
 
 # stworzenie nowego projektu
@@ -31,16 +31,84 @@ pipenv shell
     import sys
     sys.executable
     widzimy lokalizacje ktora znajduje sie w naszymw irtualnym srodowisku
+to oznacza, że cokolwiek zainstalujemy w naszym virtual env to bd zainstalowane w naszym virt srodowisku a nie globalnie
 
+2a import requests - dziala bez bledu
+exit() - wychodzimy z konsoli pythonowej
+
+2b deaktywacja wirt środowiska
+exit
 
 3. odpalanie komand z virtualenv
 pipenv run
+
+4. odpalanie pythona
+pipenv run python - korzysta z pythona  wnaszym virtual env
+
+5. odpalanie skryptow pythonowych
+pipenv run python script.py
+
+6. instalacja z requirements.txt - możemy zaimportować do Pipfile
+pipenv install -r 'location(directory)'
+
+7. wyświetlenie zależności w sposob, ktore zostana dodane do requirements.txt (jesli ktos w teamie uzywa pipa)
+pipenv lock -r
+
+8. instalacja pamieku tylko w środowisku deweloperskim, ale nie produkcyjnym
+pipenv install pytest --dev
+-> normalna instalacja
+-> ale umieszczenie w Pipfile w sekcji dev-packages
+
+9. odinstalowanie pakietu
+pipenv uninstall request
+- usuniecie z Pipfile
+
+10. ręczna zmiana pliku Pipfile
+a. wersji pythona
+-> z 3.7 na 3.6 -> konieczność ponownego stworzenia środowiska, bo mamy zupełnie inną wersję pythona
+pipenv --python 3.6
+komunikat, że nastąpiła zmiana z 3.6 na 3.6.1
+jeśli odpalimy terminal (pipenv run python) to wyświetla się, że używamy wersji python 3.6.1
+-> zmiana w Pipfile z 3.7 na 3.6
+11. usunięcie wirtualnego środowiska
+pipenv --rm
+
+12. stworzenie od nowa wirtualnego środowiska od nowa na podstawie Pipfile (wersja pythona, lista pakietów)
+-> do odpalenia za każdym razem gdy dokonamy zmian w Pipfile
+pipenv install
+
+13. sprawdzenie ścieżki do wirt środowiska
+pipenv --venv
+
+14.
+- spr PEP 508
+- spr bezpieczenstwa zainstalowanych pakietow
+- na tej podst możemy zmienić Pipfile i ponownie odpalić pipenv install
+pipenv check
+
+15. wyświetlanie drzewa zainstalowanych pakietów i zależności
+pipenv graph
+
+16. jeśli jestesmy gotowi do przekazania kodu na produkcję (po przetestowaniu pakietow):
+- na podst Pipfile.lock
+pipenv lock
+pipenv install --ignore-pipfile - stw środ na podst Pipfile.lock i ignorowanie pliku, który był wykorzystany z defaultu
+
+17. ustawianie zmiennych środowiskowych dla danego środowiska
+np. gdy pracujemy z kilkoma projektami flask czy django
+- stworzenie pliku w dir .env (wyppisać zm środowiskowe, które chcemy używać w nszym wirtual env)
+DODAĆ DO .gitignore
+sprawdzenie:
+pipenv run python
+
+import os
+os.environ['SECRET_KEY']
 
 Pipfile - podobny do requirements.txt
 - przepis na to jak odtworzyc nasze wirtualne środowisko
 - TOML - format, format, ktory prezentuje budowę klucz - wartość
 - source -
-- packages - lista pakietow, wraz z konkretna wersja jesli jest potrzebne
+- packages - lista pakietow, wraz z konkretna wersja jesli jest potrzebna
 - dev-packages -
 - requires - wskazanie wersji pythona
 - edytowalny - mozemy uzupelniac recznie nazwą pakietu
